@@ -182,7 +182,13 @@ def main():
 
     print(args)
     while True:
-        raw_text = args.prompt if args.prompt else input("Model prompt >>> ")
+        try:
+            raw_text = args.prompt if args.prompt else input("Model prompt >>> ")
+        except Exception as e:
+            print('try again, got an error:', e)
+            continue
+        if not raw_text:
+            continue
         if args.model_type in ["transfo-xl", "xlnet"]:
             # Models with memory likes to have a long prompt for short inputs.
             raw_text = (args.padding_text if args.padding_text else PADDING_TEXT) + raw_text
