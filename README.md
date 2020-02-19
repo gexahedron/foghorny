@@ -19,7 +19,7 @@ Folders with ```s_``` prefix contain Small (124M) model, ```m_``` - for Medium (
 2.2. Go to Menu -> Settings -> Advanced -> Export Telegram data, choose "Personal chats" and "Machine-readable JSON".
 2.3. Click Export and wait.
 
-# 3. Install python libraries
+# 3. Install python libraries / setup conda environment
 ```bash
 conda env create -f environment.yml
 ```
@@ -30,13 +30,23 @@ rm -rf {PATH_TO_ANACONDA2_LIBRARIES}/anaconda2/envs/gpt/
 conda env create -f environment.yml
 ```
 
+Also add line "conda activate" (without quotemarks) to your ~/.bashrc.
+
 # 4. Prepare data for training
 
 Use script convert_json_into_plaintext.py, stdout is used for training, stderr for validation.
 
 # 5. Finetune GPT-2 to your data.
 
-Take a look at train.sh script.
+Take a look at dialogue_train.sh script. Run like this:
+```bash
+cd foghorny (or folder name of this project, where the train script is located)
+source ~/.bashrc
+conda activate gpt
+./dialogue_train.sh > out.txt 2> err.txt &
+```
+You can also monitor samples from time to time in out.txt file.
+Wait about from 30 minutes to 1 hour for training to finish.
 
 # 5. Deploy tg bot
 
