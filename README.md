@@ -19,11 +19,20 @@ Folders with ```s_``` prefix contain Small (124M) model, ```m_``` - for Medium (
 2.2. Go to Menu -> Settings -> Advanced -> Export Telegram data, choose "Personal chats" and "Machine-readable JSON".
 2.3. Click Export and wait.
 
-# 3. Prepare data for training
+# 3. Install python libraries
+```conda env create -f environment.yml
+```
+If library versions are wrong, then you would need to google the right versions, you can find one of the working configurations in the second message in pip_freeze.txt file here - https://github.com/mgrankin/ru_transformers/issues/9
+If you need to reinstall libraries, then you need to remove gpt environment from anaconda2, smth like this:
+```rm -rf {PATH_TO_ANACONDA2_LIBRARIES}/anaconda2/envs/gpt/
+conda env create -f environment.yml
+```
+
+# 4. Prepare data for training
 
 Use script convert_json_into_plaintext.py, stdout is used for training, stderr for validation.
 
-# 4. Finetune GPT-2 to your data.
+# 5. Finetune GPT-2 to your data.
 
 Take a look at train.sh script.
 
